@@ -1,0 +1,216 @@
+%% ----------------------------------------------------------
+
+%% EECS 3401 Assignment 3
+
+%% Family name: Hasan
+
+%% Given name: Sadman Sakib
+
+%% Student number: 212497509
+
+
+
+%%    Answers to Questions 6-10
+
+%% Instructions: 
+
+%% Please edit this file in the following way to answer the text
+%% questions of Assignment 1. 
+
+%% - Please replace any occurence of '[yes/no]' with either 'yes' or
+%% 'no' to answer the respective question.
+
+%% - Replace any occurence of '[explain N words]' or '[if yes (resp.
+%%   no), explain N words]' with an explanation containing no more
+%%   than N words if the condition (yes/no) applies to your previous
+%%   answer.
+
+%% - Do not remove any other lines, in particular do not remove the
+%%   task-tags (<tasknumber>)
+
+%% - Any line starting with a '%' will be ignored.
+
+%% - Submit this file electronically.
+
+%% ----------------------------------------------------------
+
+
+
+%% 6. Which of the four heuristics are admissible?
+
+%%  - hfn_null
+<6.1>
+yes
+
+%%  - hfn_misplaced
+<6.2>
+yes
+
+%%  - hfn_manhattan
+<6.3>
+yes
+
+%%  - hfn_inversions
+<6.4>
+yes
+
+
+
+
+%% /* ------------------------------------------------------ */
+
+% 7. Suppose for sliding a tile to the left we would change the
+% cost from 1 to 0.5 and leave all the other moves the same cost.
+% Does this affect the admissibility of the heuristics? Which of
+% them are admissible now?
+
+
+%%  - hfn_null
+<7.1.1>
+yes
+
+<7.1.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_misplaced
+<7.2.1>
+no
+
+<7.2.2>
+The heuristic function "hfn_misplaced" is not admissible whenever there is at 
+least one or more movement of a tile to the left. Once there is at least one 
+movement of a tile to the left the actual cost of reaching the goal state 
+decreases regardless of the number of misplaced tiles in state S. This causes 
+the heuristic function to overestimate the cost to reach a goal state, i.e 
+h(n) > h*(n).
+
+
+%%  - hfn_manhattan
+<7.3.1>
+no
+
+<7.3.2>
+The heuristic function "hfn_manhattan" is not admissible whenever there is at 
+least one or more movement of a tile to the left. Once there is at least one 
+movement of a tile to the left the actual cost of reaching the goal state 
+decreases regardless of the sum of manhattan distance for all misplaced tiles 
+in S. This causes the heuristic function to overestimate the cost to reach a 
+goal state, i.e h(n) > h*(n).
+
+
+%%  - hfn_inversions
+<7.4.1>
+no
+
+<7.4.2>
+The heuristic function "hfn_inversions" is not admissible whenever there is at 
+least one or more movement of a tile to the left. Once there is at least one 
+movement of a tile to the left the actual cost of reaching the goal state 
+decreases regardless of the the number of inverted tiles in S. This causes 
+the heuristic function to overestimate the cost to reach a goal state, i.e 
+h(n) > h*(n).
+
+
+%% /* ------------------------------------------------------ */
+
+% 8. Now suppose we would change the cost for sliding a tile to the
+% left to 2 and leave all the other moves the same cost. Does this
+% now affect the admissibility of the four heuristics? Again, which
+% of them are admissible?
+
+%%  - hfn_null
+<8.1.1>
+yes
+
+<8.1.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_misplaced
+<8.2.1>
+yes
+
+<8.2.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_manhattan
+<8.3.1>
+yes
+
+<8.3.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_inversions
+<8.4.1>
+yes
+
+<8.4.2>
+[if no explain in 100 words or less]
+
+
+
+%% /* ------------------------------------------------------ */
+
+% 9. In the former modification (sliding to the LEFT costs 0.5), can
+% you say for sure which heuristic will be the fastest (expand the
+% least number of states) in finding a (not necessary optimal)
+% solution? Explain.
+<9.1>
+yes
+
+<9.2>
+Out of the 3 non-admissible heuristic function, "hfn_misplaced", will be the 
+fastest to finding a solution. This is simply because the heuristic function 
+simply returns the count of the misplaced tiles in state S whereas the other 
+heuristic functions require calculating the manhattan distance and counting the 
+number of inverted pair of tiles respectively which requires expanding more 
+states and thus take longer.
+
+%% /* ------------------------------------------------------ */
+
+% 10. One can obtain another heuristic for the N-puzzle by relaxing the
+% problem as follows: let's say that a tile can move from square A to
+% square B if B is blank.  The exact solution to this problem defines
+% Gaschnig's heuristic. Explain why Gaschnig's heuristic is at
+% least as accurate as hfn_misplaced.  Show some cases where it
+% is more accurate than both the hfn_misplaced} and 
+% hfn_manhattan} heuristics.  Can you suggest a way to calculate
+% Gaschnig's heuristic efficiently?
+
+<10.1>
+The significant difference between hfn_misplaced heuristic and Gasching's  
+heuristic is, hfn_misplaced can place any tile in any other position in 
+one move whereas Gaschnig’s can only move a tile to the black spot. Hence, 
+Gaschnig’s heuristic will always take at least one move to get a tile to its 
+goal position, and may require two moves if the blank location is in the goal 
+position and tiles are still misplaced. Thus, Gaschnig’s heuristic always 
+returns an equal or more number of moves than the hfn_misplaced heuristic.
+
+<10.2>
+A simple case where Gaschnig’s heuristic is more accurate than hfn_misplaced and
+hfn_manhattan heuristics is: 
+Let the following 2x2 board represent a state S = [[2, 1], [3, blank]] 
+and the goal state is G = [[1, 2], [3, blank]]. Then for S,
+- hfn_misplaced heuristic will return 2.
+- hfn_manhattan heuristic will return 2.
+- Gaschnig’s heuristic will return 3.
+
+<10.3>
+To calculate Gaschnig’s heuristic efficiently, we repeat the following until 
+the goal state has been reached: 
+1. let B be the current location of the blank;
+2. if B is occupied by tile A (not blank) in the goal state, move A to B;
+3. otherwise, move any misplaced tile to B.
+
+A psuedo code representation:
+num_moves = 0
+while not in goal state:
+    if blank not in goal position:
+        swap blank with matched tile
+    else
+        swap blank with any misplaced tile
+    num_moves++
+return moves
